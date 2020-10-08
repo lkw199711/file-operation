@@ -22,6 +22,7 @@ namespace 文件操作
 
         private void selectFolderBtn_Click(object sender, EventArgs e)
         {
+            // 文件名选取
             DialogResult result = folderSelected.ShowDialog();
 
             if (result == DialogResult.OK) //另外一种判断办法 if (df.ShowDialog(this) == DialogResult.OK)   
