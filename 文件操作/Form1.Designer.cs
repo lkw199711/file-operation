@@ -40,6 +40,10 @@
             this.deleteKeyText = new System.Windows.Forms.TextBox();
             this.batchDeleteBtn = new System.Windows.Forms.Button();
             this.md5DeleteBtn = new System.Windows.Forms.Button();
+            this.prefixText = new System.Windows.Forms.TextBox();
+            this.tailsText = new System.Windows.Forms.TextBox();
+            this.addPrefixBtn = new System.Windows.Forms.Button();
+            this.addTailsBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // folderText
@@ -133,11 +137,49 @@
             this.md5DeleteBtn.UseVisualStyleBackColor = true;
             this.md5DeleteBtn.Click += new System.EventHandler(this.md5DeleteBtn_Click);
             // 
+            // prefixText
+            // 
+            this.prefixText.Location = new System.Drawing.Point(45, 235);
+            this.prefixText.Name = "prefixText";
+            this.prefixText.Size = new System.Drawing.Size(187, 21);
+            this.prefixText.TabIndex = 10;
+            // 
+            // tailsText
+            // 
+            this.tailsText.Location = new System.Drawing.Point(45, 284);
+            this.tailsText.Name = "tailsText";
+            this.tailsText.Size = new System.Drawing.Size(187, 21);
+            this.tailsText.TabIndex = 11;
+            // 
+            // addPrefixBtn
+            // 
+            this.addPrefixBtn.Location = new System.Drawing.Point(252, 235);
+            this.addPrefixBtn.Name = "addPrefixBtn";
+            this.addPrefixBtn.Size = new System.Drawing.Size(105, 23);
+            this.addPrefixBtn.TabIndex = 12;
+            this.addPrefixBtn.Text = "添加前缀";
+            this.addPrefixBtn.UseVisualStyleBackColor = true;
+            this.addPrefixBtn.Click += new System.EventHandler(this.addPrefixBtn_Click);
+            // 
+            // addTailsBtn
+            // 
+            this.addTailsBtn.Location = new System.Drawing.Point(252, 282);
+            this.addTailsBtn.Name = "addTailsBtn";
+            this.addTailsBtn.Size = new System.Drawing.Size(105, 23);
+            this.addTailsBtn.TabIndex = 13;
+            this.addTailsBtn.Text = "添加尾缀";
+            this.addTailsBtn.UseVisualStyleBackColor = true;
+            this.addTailsBtn.Click += new System.EventHandler(this.addTailsBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 355);
+            this.Controls.Add(this.addTailsBtn);
+            this.Controls.Add(this.addPrefixBtn);
+            this.Controls.Add(this.tailsText);
+            this.Controls.Add(this.prefixText);
             this.Controls.Add(this.md5DeleteBtn);
             this.Controls.Add(this.batchDeleteBtn);
             this.Controls.Add(this.deleteKeyText);
@@ -169,6 +211,10 @@
         private System.Windows.Forms.TextBox deleteKeyText;
         private System.Windows.Forms.Button batchDeleteBtn;
         private System.Windows.Forms.Button md5DeleteBtn;
+        private System.Windows.Forms.TextBox prefixText;
+        private System.Windows.Forms.TextBox tailsText;
+        private System.Windows.Forms.Button addPrefixBtn;
+        private System.Windows.Forms.Button addTailsBtn;
     }
 }
 

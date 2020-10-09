@@ -79,7 +79,7 @@ namespace 文件操作
             string oldStr = replaceOldText.Text;
             string newStr = replaceNewText.Text;
 
-            folder_operation(path, oldStr, newStr);
+            folder_operation(path,"replace", oldStr, newStr);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace 文件操作
         /// </summary>
         /// <param name="dir">目录路径</param>
         /// <param name="delname">待删除文件或文件夹名称</param>
-        public void folder_operation(string dir,string type, string key0, string key1="")
+        public void folder_operation(string dir, string type, string key0, string key1 = "")
         {
             // 非文件夹
             if (!Directory.Exists(dir)) return;
@@ -100,7 +100,7 @@ namespace 文件操作
 
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
                 {
-                    
+
                     // 检索没有关键字
                     if (!fileName.Contains(key))
                     {
@@ -127,7 +127,8 @@ namespace 文件操作
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
                 {
                     // 目标为文件夹
-                    if(Directory.Exists(fileName)){
+                    if (Directory.Exists(fileName))
+                    {
                         // 递归继续寻找符合文件
                         folder_operation(fileName, "md5-delete", sampleFile);
                         continue;
@@ -153,17 +154,43 @@ namespace 文件操作
 
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
                 {
-                    
+
                     // 检索没有关键字
                     if (!fileName.Contains(oldStr))
                     {
                         // 递归继续寻找符合文件
-                        folder_operation(fileName, oldStr, newStr);
+                        folder_operation(fileName,type, oldStr, newStr);
                         continue;
                     }
 
                     // 替换文件名
-                    replace(fileName, oldStr, newStr);       
+                    replace(fileName, oldStr, newStr);
+                }
+
+                return;
+            }
+
+            //添加前缀尾缀
+            /**
+             * 添加前缀尾缀功能目前不带有遍历目录树特性
+             * 也不对文件夹进行操作
+             */
+            if (type == "prefix" || type == "tails")
+            {
+                // 被替换关键字
+                string key = key0;
+
+                foreach (string fileName in Directory.GetFileSystemEntries(dir))
+                {
+                    // 获取不带路径的文件名
+                    string name = Path.GetFileName(fileName);
+                    string newStr = (type == "prefix" ? key + name : name + key);
+
+                    // 如果目标非文件,跳出
+                    if (!File.Exists(fileName)) continue;
+
+                    // 替换文件名
+                    replace(fileName, name, newStr);
                 }
 
                 return;
@@ -229,13 +256,27 @@ namespace 文件操作
         /// 删除文件或目录
         /// </summary>
         /// <param name="fileName">文件路径</param>
-        public void replace(string fileName,string oldStr,string newStr)
+        public void replace(string fileName, string oldStr, string newStr)
         {
             // 如果是目录,调用文件夹方法
             if (Directory.Exists(fileName)) Directory.Move(fileName, fileName.Replace(oldStr, newStr));
 
             // 如果是文件,调用文件方法
             if (File.Exists(fileName)) File.Move(fileName, fileName.Replace(oldStr, newStr));
+        }
+
+        private void addPrefixBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            string prefix = prefixText.Text;
+            folder_operation(path, "prefix", prefix);
+        }
+
+        private void addTailsBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            string tails = tailsText.Text;
+            folder_operation(path, "tails", tails);
         }
     }
 }
