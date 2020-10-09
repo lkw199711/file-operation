@@ -131,6 +131,7 @@
             this.md5DeleteBtn.TabIndex = 9;
             this.md5DeleteBtn.Text = "根据md5删除";
             this.md5DeleteBtn.UseVisualStyleBackColor = true;
+            this.md5DeleteBtn.Click += new System.EventHandler(this.md5DeleteBtn_Click);
             // 
             // Form1
             // 

@@ -68,7 +68,11 @@ namespace 文件操作
                 fileText.Text = fileName;
             }
         }
-
+        /// <summary>
+        /// 根据关键字替换,更改文件名
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void replaceFileNameBtn_Click(object sender, EventArgs e)
         {
             string path = folderText.Text;
@@ -91,10 +95,12 @@ namespace 文件操作
             //根据关键字删除
             if (type == "keyword-delete")
             {
+                // 删除关键字
+                string key = key0;
+
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
                 {
-                    // 删除关键字
-                    string key = key0;
+                    
                     // 检索没有关键字
                     if (!fileName.Contains(key))
                     {
@@ -110,15 +116,44 @@ namespace 文件操作
                 return;
             }
 
+            //根据md5删除
+            if (type == "md5-delete")
+            {
+                // 删除关键字
+                string sampleFile = key0;
+                // 样本文件的md5值
+                string sampleMd5 = GetMD5HashFromFile(sampleFile);
+
+                foreach (string fileName in Directory.GetFileSystemEntries(dir))
+                {
+                    // 目标为文件夹
+                    if(Directory.Exists(fileName)){
+                        // 递归继续寻找符合文件
+                        folder_operation(fileName, "md5-delete", sampleFile);
+                        continue;
+                    }
+
+                    // md5值不相同,则跳出
+                    if (!(GetMD5HashFromFile(fileName) == sampleMd5)) continue;
+
+                    // md5值相同,则删除文件
+                    delete(fileName);
+                }
+
+                return;
+            }
+
             //替换文件名
             if (type == "replace")
             {
+                // 被替换关键字
+                string oldStr = key0;
+                // 替换关键字
+                string newStr = key1;
+
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
                 {
-                    // 被替换关键字
-                    string oldStr = key0;
-                    // 替换关键字
-                    string newStr = key1;
+                    
                     // 检索没有关键字
                     if (!fileName.Contains(oldStr))
                     {
@@ -170,8 +205,13 @@ namespace 文件操作
         {
             string path = folderText.Text;
             string key = deleteKeyText.Text;
-            string file = fileText.Text;
             folder_operation(path, "keyword-delete", key);
+        }
+        private void md5DeleteBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            string file = fileText.Text;
+            folder_operation(path, "md5-delete", file);
         }
         /// <summary>
         /// 删除文件或目录
