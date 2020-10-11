@@ -105,7 +105,7 @@ namespace 文件操作
                     if (!fileName.Contains(key))
                     {
                         // 递归继续寻找符合文件
-                        folder_operation(fileName, "keyword-delete", key);
+                        folder_operation(fileName, type, key);
                         continue;
                     }
 
@@ -130,7 +130,7 @@ namespace 文件操作
                     if (Directory.Exists(fileName))
                     {
                         // 递归继续寻找符合文件
-                        folder_operation(fileName, "md5-delete", sampleFile);
+                        folder_operation(fileName, type, sampleFile);
                         continue;
                     }
 
@@ -159,7 +159,7 @@ namespace 文件操作
                     if (!fileName.Contains(oldStr))
                     {
                         // 递归继续寻找符合文件
-                        folder_operation(fileName,type, oldStr, newStr);
+                        folder_operation(fileName, type, oldStr, newStr);
                         continue;
                     }
 
