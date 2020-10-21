@@ -247,7 +247,7 @@ namespace 文件操作
         public void delete(string fileName)
         {
             // 如果是目录,调用文件夹方法
-            if (Directory.Exists(fileName)) Directory.Delete(fileName);
+            if (Directory.Exists(fileName)) Directory.Delete(fileName, true);
 
             // 如果是文件,调用文件方法
             if (File.Exists(fileName)) File.Delete(fileName);
