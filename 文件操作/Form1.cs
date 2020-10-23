@@ -108,7 +108,7 @@ namespace 文件操作
                         folder_operation(fileName, type, key);
                         continue;
                     }
-
+                    lkw.log("找到文件");
                     // 删除文件
                     delete(fileName);
                 }
@@ -248,9 +248,10 @@ namespace 文件操作
         {
             // 如果是目录,调用文件夹方法
             if (Directory.Exists(fileName)) Directory.Delete(fileName, true);
-
+            lkw.log(fileName);
             // 如果是文件,调用文件方法
             if (File.Exists(fileName)) File.Delete(fileName);
+            lkw.log(fileName);
         }
         /// <summary>
         /// 删除文件或目录
