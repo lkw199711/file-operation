@@ -79,7 +79,7 @@ namespace 文件操作
             string oldStr = replaceOldText.Text;
             string newStr = replaceNewText.Text;
 
-            folder_operation(path,"replace", oldStr, newStr);
+            folder_operation(path, "replace", oldStr, newStr);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace 文件操作
         /// </summary>
         /// <param name="dir">目录路径</param>
         /// <param name="delname">待删除文件或文件夹名称</param>
-        public void folder_operation(string dir, string type, string key0, string key1 = "")
+        public void folder_operation(string dir, string type, string key0 = "", string key1 = "")
         {
             // 非文件夹
             if (!Directory.Exists(dir)) return;
@@ -195,6 +195,43 @@ namespace 文件操作
 
                 return;
             }
+
+            if (type == "merge")
+            {
+                foreach (string fileName in Directory.GetFileSystemEntries(dir))
+                {
+                    if (Directory.Exists(fileName))
+                    {
+                        folder_operation(fileName, type, key0);
+                        continue;
+                    }
+                    // 获取不带路径的文件名
+                    string name = Path.GetFileName(fileName);
+
+                    File.Move(fileName, dir + name);
+                }
+
+                return;
+            }
+
+            if (type == "serial")
+            {
+                int serial = 0;
+                foreach (string fileName in Directory.GetFileSystemEntries(dir))
+                {
+                    if (Directory.Exists(fileName))
+                    {
+                        folder_operation(fileName, type);
+                        continue;
+                    }
+                    // 获取不带路径的文件名
+                    string suffix = Path.GetExtension(fileName);
+
+                    File.Move(fileName, dir + "\\" + (++serial).ToString() + suffix);
+                }
+
+                return;
+            }
         }
 
         /// <summary>
@@ -278,6 +315,18 @@ namespace 文件操作
             string path = folderText.Text;
             string tails = tailsText.Text;
             folder_operation(path, "tails", tails);
+        }
+
+        private void merFileBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            folder_operation(path, "merge", "");
+        }
+
+        private void serialRenameBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            folder_operation(path, "serial");
         }
     }
 }

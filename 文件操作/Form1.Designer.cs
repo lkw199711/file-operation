@@ -44,6 +44,8 @@
             this.tailsText = new System.Windows.Forms.TextBox();
             this.addPrefixBtn = new System.Windows.Forms.Button();
             this.addTailsBtn = new System.Windows.Forms.Button();
+            this.merFileBtn = new System.Windows.Forms.Button();
+            this.serialRenameBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // folderText
@@ -171,11 +173,33 @@
             this.addTailsBtn.UseVisualStyleBackColor = true;
             this.addTailsBtn.Click += new System.EventHandler(this.addTailsBtn_Click);
             // 
+            // merFileBtn
+            // 
+            this.merFileBtn.Location = new System.Drawing.Point(428, 233);
+            this.merFileBtn.Name = "merFileBtn";
+            this.merFileBtn.Size = new System.Drawing.Size(126, 23);
+            this.merFileBtn.TabIndex = 14;
+            this.merFileBtn.Text = "整合文件夹";
+            this.merFileBtn.UseVisualStyleBackColor = true;
+            this.merFileBtn.Click += new System.EventHandler(this.merFileBtn_Click);
+            // 
+            // serialRenameBtn
+            // 
+            this.serialRenameBtn.Location = new System.Drawing.Point(575, 233);
+            this.serialRenameBtn.Name = "serialRenameBtn";
+            this.serialRenameBtn.Size = new System.Drawing.Size(133, 23);
+            this.serialRenameBtn.TabIndex = 15;
+            this.serialRenameBtn.Text = "按序号重命名";
+            this.serialRenameBtn.UseVisualStyleBackColor = true;
+            this.serialRenameBtn.Click += new System.EventHandler(this.serialRenameBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 355);
+            this.Controls.Add(this.serialRenameBtn);
+            this.Controls.Add(this.merFileBtn);
             this.Controls.Add(this.addTailsBtn);
             this.Controls.Add(this.addPrefixBtn);
             this.Controls.Add(this.tailsText);
@@ -215,6 +239,8 @@
         private System.Windows.Forms.TextBox tailsText;
         private System.Windows.Forms.Button addPrefixBtn;
         private System.Windows.Forms.Button addTailsBtn;
+        private System.Windows.Forms.Button merFileBtn;
+        private System.Windows.Forms.Button serialRenameBtn;
     }
 }
 
