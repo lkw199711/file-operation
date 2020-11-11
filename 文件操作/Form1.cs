@@ -12,9 +12,11 @@ using System.Windows.Forms;
 using lkw;
 
 namespace 文件操作
-{
+{  
     public partial class Form1 : Form
     {
+        int i = 0;
+
         Lkw lkw = new Lkw();
         public Form1()
         {
@@ -208,7 +210,12 @@ namespace 文件操作
                     // 获取不带路径的文件名
                     string name = Path.GetFileName(fileName);
 
-                    File.Move(fileName, dir + name);
+                    // 获取文件扩展名
+                    string strExt = Path.GetExtension(fileName);
+
+                    string newName = dir.Substring(0, dir.LastIndexOf(@"\")+1) + (i++).ToString() + strExt;
+
+                    File.Move(fileName, newName);
                 }
 
                 return;
