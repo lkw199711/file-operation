@@ -46,6 +46,10 @@
             this.addTailsBtn = new System.Windows.Forms.Button();
             this.merFileBtn = new System.Windows.Forms.Button();
             this.serialRenameBtn = new System.Windows.Forms.Button();
+            this.outFolderText = new System.Windows.Forms.TextBox();
+            this.outputFolderBtn = new System.Windows.Forms.Button();
+            this.cutPicBtn = new System.Windows.Forms.Button();
+            this.curLengthText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // folderText
@@ -193,11 +197,48 @@
             this.serialRenameBtn.UseVisualStyleBackColor = true;
             this.serialRenameBtn.Click += new System.EventHandler(this.serialRenameBtn_Click);
             // 
+            // outFolderText
+            // 
+            this.outFolderText.Location = new System.Drawing.Point(45, 89);
+            this.outFolderText.Name = "outFolderText";
+            this.outFolderText.Size = new System.Drawing.Size(572, 21);
+            this.outFolderText.TabIndex = 16;
+            // 
+            // outputFolderBtn
+            // 
+            this.outputFolderBtn.Location = new System.Drawing.Point(633, 89);
+            this.outputFolderBtn.Name = "outputFolderBtn";
+            this.outputFolderBtn.Size = new System.Drawing.Size(75, 23);
+            this.outputFolderBtn.TabIndex = 17;
+            this.outputFolderBtn.Text = "输出目录";
+            this.outputFolderBtn.UseVisualStyleBackColor = true;
+            // 
+            // cutPicBtn
+            // 
+            this.cutPicBtn.Location = new System.Drawing.Point(575, 282);
+            this.cutPicBtn.Name = "cutPicBtn";
+            this.cutPicBtn.Size = new System.Drawing.Size(133, 23);
+            this.cutPicBtn.TabIndex = 18;
+            this.cutPicBtn.Text = "裁剪图片";
+            this.cutPicBtn.UseVisualStyleBackColor = true;
+            this.cutPicBtn.Click += new System.EventHandler(this.cutPicBtn_Click);
+            // 
+            // curLengthText
+            // 
+            this.curLengthText.Location = new System.Drawing.Point(428, 284);
+            this.curLengthText.Name = "curLengthText";
+            this.curLengthText.Size = new System.Drawing.Size(126, 21);
+            this.curLengthText.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 355);
+            this.Controls.Add(this.curLengthText);
+            this.Controls.Add(this.cutPicBtn);
+            this.Controls.Add(this.outputFolderBtn);
+            this.Controls.Add(this.outFolderText);
             this.Controls.Add(this.serialRenameBtn);
             this.Controls.Add(this.merFileBtn);
             this.Controls.Add(this.addTailsBtn);
@@ -241,6 +282,10 @@
         private System.Windows.Forms.Button addTailsBtn;
         private System.Windows.Forms.Button merFileBtn;
         private System.Windows.Forms.Button serialRenameBtn;
+        private System.Windows.Forms.TextBox outFolderText;
+        private System.Windows.Forms.Button outputFolderBtn;
+        private System.Windows.Forms.Button cutPicBtn;
+        private System.Windows.Forms.TextBox curLengthText;
     }
 }
 

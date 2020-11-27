@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using lkw;
 
 namespace 文件操作
-{  
+{
     public partial class Form1 : Form
     {
         int i = 0;
@@ -213,7 +213,7 @@ namespace 文件操作
                     // 获取文件扩展名
                     string strExt = Path.GetExtension(fileName);
 
-                    string newName = dir.Substring(0, dir.LastIndexOf(@"\")+1) + (i++).ToString() + strExt;
+                    string newName = dir.Substring(0, dir.LastIndexOf(@"\") + 1) + (i++).ToString() + strExt;
 
                     File.Move(fileName, newName);
                 }
@@ -231,13 +231,73 @@ namespace 文件操作
                         folder_operation(fileName, type);
                         continue;
                     }
-                    // 获取不带路径的文件名
+                    // 获取文件扩展名
                     string suffix = Path.GetExtension(fileName);
 
                     File.Move(fileName, dir + "\\" + (++serial).ToString() + suffix);
                 }
 
                 return;
+            }
+
+            //裁切图片
+            if (type == "cutting")
+            {
+                string outPath = key0;
+                int curLength = int.Parse(key1);
+                int fileNum = 0;
+
+                foreach (string fileName in Directory.GetFileSystemEntries(dir))
+                {
+                    if (Directory.Exists(fileName))
+                    {
+                        folder_operation(fileName, type, key0, key1);
+                        continue;
+                    }
+
+                    Bitmap pic = new Bitmap(fileName);
+                    int width = pic.Width;
+                    int num = 0;
+
+
+                    // 获取不带路径不带扩展名的文件名
+                    string name = Path.GetFileNameWithoutExtension(fileName);
+
+                    string topPath = dir.Substring(0, dir.LastIndexOf(@"\") + 1);
+                    string folderName = dir.Substring(dir.LastIndexOf(@"\") + 1);
+
+                    string newPath = outPath + "\\" + folderName + "\\";
+                    if (!Directory.Exists(newPath)) { Directory.CreateDirectory(newPath); }
+
+                    // 获取文件扩展名
+                    string strExt = Path.GetExtension(fileName);
+
+                    while ((pic.Height - curLength * num) > 0)
+                    {
+                        int leftHeight = pic.Height - curLength * num;
+                        int height = leftHeight > curLength ? curLength : leftHeight;
+
+                        Bitmap newPic = new Bitmap(width, height);
+
+                        for (int y = 0; y < height; y++)
+                        {
+                            for (int x = 0; x < width; x++)
+                            {
+                                newPic.SetPixel(x, y, pic.GetPixel(x, y + num * curLength));
+                            }
+                        }
+
+                        newPic.Save(newPath + (num + fileNum).ToString() + strExt);
+
+                        newPic.Dispose();
+
+                        num++;
+                    }
+
+                    pic.Dispose();
+
+                    fileNum += num;
+                }
             }
         }
 
@@ -334,6 +394,17 @@ namespace 文件操作
         {
             string path = folderText.Text;
             folder_operation(path, "serial");
+        }
+
+        private void cutPicBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            string newPath = outFolderText.Text;
+            string length = curLengthText.Text;
+
+            //裁切图片操作 参数一为源路径 参数二为裁切类型标识 参数三输出路径 参数四为单元图片长度
+            lkw.NewWork(() => { folder_operation(path, "cutting", newPath, length); });
+            
         }
     }
 }
