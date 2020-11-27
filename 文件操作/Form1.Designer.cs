@@ -229,6 +229,7 @@
             this.curLengthText.Name = "curLengthText";
             this.curLengthText.Size = new System.Drawing.Size(126, 21);
             this.curLengthText.TabIndex = 19;
+            this.curLengthText.Text = "2000";
             // 
             // Form1
             // 
