@@ -243,59 +243,86 @@ namespace 文件操作
             //裁切图片
             if (type == "cutting")
             {
+                //输出目录
                 string outPath = key0;
+                //单个图片的长度
                 int curLength = int.Parse(key1);
+                //文件索引
                 int fileNum = 0;
 
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
                 {
                     if (Directory.Exists(fileName))
                     {
+                        //文件夹递归操作
                         folder_operation(fileName, type, key0, key1);
                         continue;
                     }
 
+                    //图片文件实例化
                     Bitmap pic = new Bitmap(fileName);
+                    //宽度
                     int width = pic.Width;
+                    //图片数量索引
                     int num = 0;
 
 
                     // 获取不带路径不带扩展名的文件名
                     string name = Path.GetFileNameWithoutExtension(fileName);
 
+                    //上层目录
                     string topPath = dir.Substring(0, dir.LastIndexOf(@"\") + 1);
-                    string folderName = dir.Substring(dir.LastIndexOf(@"\") + 1);
 
+                    //获取当前文件夹名
+                    string folderName = dir.Substring(dir.LastIndexOf(@"\") + 1);
+                    
+                    //新目录路径
                     string newPath = outPath + "\\" + folderName + "\\";
+                    
+                    //新建目录(Bitmap.save无法存储没有目录的文件夹,所以要先创建不存在的路径)
                     if (!Directory.Exists(newPath)) { Directory.CreateDirectory(newPath); }
 
                     // 获取文件扩展名
                     string strExt = Path.GetExtension(fileName);
 
+                    //循环直到分割完所有高度
                     while ((pic.Height - curLength * num) > 0)
                     {
+                        //剩下的高度
                         int leftHeight = pic.Height - curLength * num;
+                        //当前新建图片单元的高度
                         int height = leftHeight > curLength ? curLength : leftHeight;
-
+                        //新建空图片
                         Bitmap newPic = new Bitmap(width, height);
 
                         for (int y = 0; y < height; y++)
                         {
                             for (int x = 0; x < width; x++)
                             {
+                                //获取旧图片的色彩,设置给新的图片单元
                                 newPic.SetPixel(x, y, pic.GetPixel(x, y + num * curLength));
                             }
                         }
 
+                        //存储文件
                         newPic.Save(newPath + (num + fileNum).ToString() + strExt);
-
+                        
+                        //释放Bitmap资源(图片单元)
                         newPic.Dispose();
 
+                        //图片单元数量索引递增
                         num++;
                     }
-
+                    
+                    /*
+                     释放Bitmap资源(整个文件)
+                    如果不使用Bitmap.Dispose释放内存
+                    在使用bitMap到一定数量的时候会报错"内存不足"
+                    我也不知道为什么会这样,明明有16g内存
+                     */
                     pic.Dispose();
 
+                    //源图片文件索引递增
                     fileNum += num;
                 }
             }
