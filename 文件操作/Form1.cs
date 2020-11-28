@@ -27,15 +27,15 @@ namespace 文件操作
         EncoderParameters myEncoderParameters = new EncoderParameters(1);
 
         EncoderParameter myEncoderParameter;
+
+        //创建一个Endoder对象
+        System.Drawing.Imaging.Encoder myEncoder =
+            System.Drawing.Imaging.Encoder.Quality;
         public Form1()
         {
             InitializeComponent();
 
             jgpEncoder = GetEncoder(ImageFormat.Jpeg);
-
-            //创建一个Endoder对象
-            System.Drawing.Imaging.Encoder myEncoder =
-                System.Drawing.Imaging.Encoder.Quality;
 
             myEncoderParameter = new EncoderParameter(myEncoder, 100L);//这里的50L用来设置保存时的图片质量
                                                                                        //测试时400多K的图片保存为100多K，图片失真也不是很厉害
@@ -447,6 +447,10 @@ namespace 文件操作
             string path = folderText.Text;
             string newPath = outFolderText.Text;
             string length = curLengthText.Text;
+
+            int compress = int.Parse(compressText.Text);
+
+            myEncoderParameter = new EncoderParameter(myEncoder, compress);
 
             //裁切图片操作 参数一为源路径 参数二为裁切类型标识 参数三输出路径 参数四为单元图片长度
             lkw.NewWork(() => { folder_operation(path, "cutting", newPath, length); });

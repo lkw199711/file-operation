@@ -50,6 +50,7 @@
             this.outputFolderBtn = new System.Windows.Forms.Button();
             this.cutPicBtn = new System.Windows.Forms.Button();
             this.curLengthText = new System.Windows.Forms.TextBox();
+            this.compressText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // folderText
@@ -227,15 +228,24 @@
             // 
             this.curLengthText.Location = new System.Drawing.Point(428, 284);
             this.curLengthText.Name = "curLengthText";
-            this.curLengthText.Size = new System.Drawing.Size(126, 21);
+            this.curLengthText.Size = new System.Drawing.Size(64, 21);
             this.curLengthText.TabIndex = 19;
             this.curLengthText.Text = "2000";
+            // 
+            // compressText
+            // 
+            this.compressText.Location = new System.Drawing.Point(498, 284);
+            this.compressText.Name = "compressText";
+            this.compressText.Size = new System.Drawing.Size(56, 21);
+            this.compressText.TabIndex = 20;
+            this.compressText.Text = "100";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 355);
+            this.Controls.Add(this.compressText);
             this.Controls.Add(this.curLengthText);
             this.Controls.Add(this.cutPicBtn);
             this.Controls.Add(this.outputFolderBtn);
@@ -287,6 +297,7 @@
         private System.Windows.Forms.Button outputFolderBtn;
         private System.Windows.Forms.Button cutPicBtn;
         private System.Windows.Forms.TextBox curLengthText;
+        private System.Windows.Forms.TextBox compressText;
     }
 }
 
