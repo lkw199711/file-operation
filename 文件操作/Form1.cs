@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -18,9 +19,27 @@ namespace 文件操作
         int i = 0;
 
         Lkw lkw = new Lkw();
+
+        ImageCodecInfo jgpEncoder;
+
+        // 创建一个EncoderParameters对象.
+        // 一个EncoderParameters对象有一个EncoderParameter数组对象
+        EncoderParameters myEncoderParameters = new EncoderParameters(1);
+
+        EncoderParameter myEncoderParameter;
         public Form1()
         {
             InitializeComponent();
+
+            jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+
+            //创建一个Endoder对象
+            System.Drawing.Imaging.Encoder myEncoder =
+                System.Drawing.Imaging.Encoder.Quality;
+
+            myEncoderParameter = new EncoderParameter(myEncoder, 100L);//这里的50L用来设置保存时的图片质量
+                                                                                       //测试时400多K的图片保存为100多K，图片失真也不是很厉害
+            myEncoderParameters.Param[0] = myEncoderParameter;
         }
         /// <summary>
         /// 文件夹选择按钮
@@ -255,7 +274,7 @@ namespace 文件操作
                     if (Directory.Exists(fileName))
                     {
                         //文件夹递归操作
-                        folder_operation(fileName, type, key0, key1);
+                        lkw.NewWork(() => { folder_operation(fileName, type, key0, key1); });
                         continue;
                     }
 
@@ -275,10 +294,10 @@ namespace 文件操作
 
                     //获取当前文件夹名
                     string folderName = dir.Substring(dir.LastIndexOf(@"\") + 1);
-                    
+
                     //新目录路径
                     string newPath = outPath + "\\" + folderName + "\\";
-                    
+
                     //新建目录(Bitmap.save无法存储没有目录的文件夹,所以要先创建不存在的路径)
                     if (!Directory.Exists(newPath)) { Directory.CreateDirectory(newPath); }
 
@@ -305,15 +324,15 @@ namespace 文件操作
                         }
 
                         //存储文件
-                        newPic.Save(newPath + (num + fileNum).ToString() + strExt);
-                        
+                        newPic.Save(newPath + (num + fileNum).ToString() + strExt, jgpEncoder, myEncoderParameters);
+
                         //释放Bitmap资源(图片单元)
                         newPic.Dispose();
 
                         //图片单元数量索引递增
                         num++;
                     }
-                    
+
                     /*
                      释放Bitmap资源(整个文件)
                     如果不使用Bitmap.Dispose释放内存
@@ -431,7 +450,21 @@ namespace 文件操作
 
             //裁切图片操作 参数一为源路径 参数二为裁切类型标识 参数三输出路径 参数四为单元图片长度
             lkw.NewWork(() => { folder_operation(path, "cutting", newPath, length); });
-            
+
+        }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
     }
 }
