@@ -448,9 +448,11 @@ namespace 文件操作
             string newPath = outFolderText.Text;
             string length = curLengthText.Text;
 
-            int compress = int.Parse(compressText.Text);
+            long compress = long.Parse(compressText.Text);
 
             myEncoderParameter = new EncoderParameter(myEncoder, compress);
+
+            myEncoderParameters.Param[0] = myEncoderParameter;
 
             //裁切图片操作 参数一为源路径 参数二为裁切类型标识 参数三输出路径 参数四为单元图片长度
             lkw.NewWork(() => { folder_operation(path, "cutting", newPath, length); });
