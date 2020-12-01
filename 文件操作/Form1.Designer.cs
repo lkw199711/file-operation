@@ -230,7 +230,7 @@
             this.curLengthText.Name = "curLengthText";
             this.curLengthText.Size = new System.Drawing.Size(64, 21);
             this.curLengthText.TabIndex = 19;
-            this.curLengthText.Text = "2000";
+            this.curLengthText.Text = "4000";
             // 
             // compressText
             // 
@@ -238,7 +238,7 @@
             this.compressText.Name = "compressText";
             this.compressText.Size = new System.Drawing.Size(56, 21);
             this.compressText.TabIndex = 20;
-            this.compressText.Text = "100";
+            this.compressText.Text = "75";
             // 
             // Form1
             // 
