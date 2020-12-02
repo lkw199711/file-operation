@@ -16,10 +16,12 @@ namespace 文件操作
 {
     public partial class Form1 : Form
     {
+        //文件序号
         int i = 0;
 
         Lkw lkw = new Lkw();
 
+        //创建图片压缩设置对象
         ImageCodecInfo jgpEncoder;
 
         // 创建一个EncoderParameters对象.
@@ -38,7 +40,7 @@ namespace 文件操作
             jgpEncoder = GetEncoder(ImageFormat.Jpeg);
 
             myEncoderParameter = new EncoderParameter(myEncoder, 100L);//这里的50L用来设置保存时的图片质量
-                                                                                       //测试时400多K的图片保存为100多K，图片失真也不是很厉害
+                                                                       //测试时400多K的图片保存为100多K，图片失真也不是很厉害
             myEncoderParameters.Param[0] = myEncoderParameter;
         }
         /// <summary>
@@ -415,33 +417,53 @@ namespace 文件操作
             // 如果是文件,调用文件方法
             if (File.Exists(fileName)) File.Move(fileName, fileName.Replace(oldStr, newStr));
         }
-
+        /// <summary>
+        /// 添加前缀 按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addPrefixBtn_Click(object sender, EventArgs e)
         {
             string path = folderText.Text;
             string prefix = prefixText.Text;
             folder_operation(path, "prefix", prefix);
         }
-
+        /// <summary>
+        /// 添加后缀 按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addTailsBtn_Click(object sender, EventArgs e)
         {
             string path = folderText.Text;
             string tails = tailsText.Text;
             folder_operation(path, "tails", tails);
         }
-
+        /// <summary>
+        /// 整合文件夹 按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void merFileBtn_Click(object sender, EventArgs e)
         {
             string path = folderText.Text;
             folder_operation(path, "merge", "");
         }
-
+        /// <summary>
+        /// 排序重命名 按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void serialRenameBtn_Click(object sender, EventArgs e)
         {
             string path = folderText.Text;
             folder_operation(path, "serial");
         }
-
+        /// <summary>
+        /// 裁剪图片 按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cutPicBtn_Click(object sender, EventArgs e)
         {
             string path = folderText.Text;
@@ -458,7 +480,11 @@ namespace 文件操作
             lkw.NewWork(() => { folder_operation(path, "cutting", newPath, length); });
 
         }
-
+        /// <summary>
+        /// 生成图片压缩设置
+        /// </summary>
+        /// <param name="format"></param>
+        /// <returns></returns>
         private ImageCodecInfo GetEncoder(ImageFormat format)
         {
 
