@@ -256,10 +256,15 @@ namespace 文件操作
                         folder_operation(fileName, type);
                         continue;
                     }
-                    // 获取文件扩展名
+                    //获取文件扩展名
                     string suffix = Path.GetExtension(fileName);
 
-                    File.Move(fileName, dir + "\\" + (++serial).ToString().PadLeft(length,'0') + suffix);
+                    //获取不带扩展名的文件名
+                    string usufName = key1 == "addpos" ? Path.GetFileNameWithoutExtension(fileName) : (++serial).ToString();
+
+                    string newName = dir + "\\" + usufName.PadLeft(length, '0') + suffix;
+
+                    File.Move(fileName, newName);
                 }
 
                 return;
@@ -502,6 +507,13 @@ namespace 文件操作
                 }
             }
             return null;
+        }
+
+        private void posRenameBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            string length = positionLengthText.Text;
+            folder_operation(path, "serial", length,"addpos");
         }
     }
 }

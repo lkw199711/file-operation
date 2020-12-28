@@ -52,6 +52,7 @@
             this.curLengthText = new System.Windows.Forms.TextBox();
             this.compressText = new System.Windows.Forms.TextBox();
             this.positionLengthText = new System.Windows.Forms.TextBox();
+            this.posRenameBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // folderText
@@ -191,11 +192,11 @@
             // 
             // serialRenameBtn
             // 
-            this.serialRenameBtn.Location = new System.Drawing.Point(622, 233);
+            this.serialRenameBtn.Location = new System.Drawing.Point(610, 233);
             this.serialRenameBtn.Name = "serialRenameBtn";
-            this.serialRenameBtn.Size = new System.Drawing.Size(86, 23);
+            this.serialRenameBtn.Size = new System.Drawing.Size(52, 23);
             this.serialRenameBtn.TabIndex = 15;
-            this.serialRenameBtn.Text = "按序号重命名";
+            this.serialRenameBtn.Text = "按序号";
             this.serialRenameBtn.UseVisualStyleBackColor = true;
             this.serialRenameBtn.Click += new System.EventHandler(this.serialRenameBtn_Click);
             // 
@@ -245,14 +246,25 @@
             // 
             this.positionLengthText.Location = new System.Drawing.Point(575, 234);
             this.positionLengthText.Name = "positionLengthText";
-            this.positionLengthText.Size = new System.Drawing.Size(38, 21);
+            this.positionLengthText.Size = new System.Drawing.Size(25, 21);
             this.positionLengthText.TabIndex = 21;
+            // 
+            // posRenameBtn
+            // 
+            this.posRenameBtn.Location = new System.Drawing.Point(670, 233);
+            this.posRenameBtn.Name = "posRenameBtn";
+            this.posRenameBtn.Size = new System.Drawing.Size(38, 23);
+            this.posRenameBtn.TabIndex = 22;
+            this.posRenameBtn.Text = "补位";
+            this.posRenameBtn.UseVisualStyleBackColor = true;
+            this.posRenameBtn.Click += new System.EventHandler(this.posRenameBtn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 355);
+            this.Controls.Add(this.posRenameBtn);
             this.Controls.Add(this.positionLengthText);
             this.Controls.Add(this.compressText);
             this.Controls.Add(this.curLengthText);
@@ -308,6 +320,7 @@
         private System.Windows.Forms.TextBox curLengthText;
         private System.Windows.Forms.TextBox compressText;
         private System.Windows.Forms.TextBox positionLengthText;
+        private System.Windows.Forms.Button posRenameBtn;
     }
 }
 
