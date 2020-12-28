@@ -219,6 +219,7 @@ namespace 文件操作
                 return;
             }
 
+            //合并文件夹
             if (type == "merge")
             {
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
@@ -242,9 +243,12 @@ namespace 文件操作
                 return;
             }
 
+            //按序重命名
             if (type == "serial")
             {
                 int serial = 0;
+                int length = int.Parse(key0);
+
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
                 {
                     if (Directory.Exists(fileName))
@@ -255,7 +259,7 @@ namespace 文件操作
                     // 获取文件扩展名
                     string suffix = Path.GetExtension(fileName);
 
-                    File.Move(fileName, dir + "\\" + (++serial).ToString() + suffix);
+                    File.Move(fileName, dir + "\\" + (++serial).ToString().PadLeft(length,'0') + suffix);
                 }
 
                 return;
@@ -457,7 +461,8 @@ namespace 文件操作
         private void serialRenameBtn_Click(object sender, EventArgs e)
         {
             string path = folderText.Text;
-            folder_operation(path, "serial");
+            string length = positionLengthText.Text;
+            folder_operation(path, "serial", length);
         }
         /// <summary>
         /// 裁剪图片 按钮

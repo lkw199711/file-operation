@@ -51,6 +51,7 @@
             this.cutPicBtn = new System.Windows.Forms.Button();
             this.curLengthText = new System.Windows.Forms.TextBox();
             this.compressText = new System.Windows.Forms.TextBox();
+            this.positionLengthText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // folderText
@@ -190,9 +191,9 @@
             // 
             // serialRenameBtn
             // 
-            this.serialRenameBtn.Location = new System.Drawing.Point(575, 233);
+            this.serialRenameBtn.Location = new System.Drawing.Point(622, 233);
             this.serialRenameBtn.Name = "serialRenameBtn";
-            this.serialRenameBtn.Size = new System.Drawing.Size(133, 23);
+            this.serialRenameBtn.Size = new System.Drawing.Size(86, 23);
             this.serialRenameBtn.TabIndex = 15;
             this.serialRenameBtn.Text = "按序号重命名";
             this.serialRenameBtn.UseVisualStyleBackColor = true;
@@ -240,11 +241,19 @@
             this.compressText.TabIndex = 20;
             this.compressText.Text = "75";
             // 
+            // positionLengthText
+            // 
+            this.positionLengthText.Location = new System.Drawing.Point(575, 234);
+            this.positionLengthText.Name = "positionLengthText";
+            this.positionLengthText.Size = new System.Drawing.Size(38, 21);
+            this.positionLengthText.TabIndex = 21;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 355);
+            this.Controls.Add(this.positionLengthText);
             this.Controls.Add(this.compressText);
             this.Controls.Add(this.curLengthText);
             this.Controls.Add(this.cutPicBtn);
@@ -298,6 +307,7 @@
         private System.Windows.Forms.Button cutPicBtn;
         private System.Windows.Forms.TextBox curLengthText;
         private System.Windows.Forms.TextBox compressText;
+        private System.Windows.Forms.TextBox positionLengthText;
     }
 }
 
