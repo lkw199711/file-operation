@@ -53,6 +53,8 @@
             this.compressText = new System.Windows.Forms.TextBox();
             this.positionLengthText = new System.Windows.Forms.TextBox();
             this.posRenameBtn = new System.Windows.Forms.Button();
+            this.setAssBtn = new System.Windows.Forms.Button();
+            this.getAssBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // folderText
@@ -259,11 +261,33 @@
             this.posRenameBtn.UseVisualStyleBackColor = true;
             this.posRenameBtn.Click += new System.EventHandler(this.posRenameBtn_Click);
             // 
+            // setAssBtn
+            // 
+            this.setAssBtn.Location = new System.Drawing.Point(575, 320);
+            this.setAssBtn.Name = "setAssBtn";
+            this.setAssBtn.Size = new System.Drawing.Size(133, 23);
+            this.setAssBtn.TabIndex = 23;
+            this.setAssBtn.Text = "设置字幕名称";
+            this.setAssBtn.UseVisualStyleBackColor = true;
+            this.setAssBtn.Click += new System.EventHandler(this.setAssBtn_Click);
+            // 
+            // getAssBtn
+            // 
+            this.getAssBtn.Location = new System.Drawing.Point(428, 320);
+            this.getAssBtn.Name = "getAssBtn";
+            this.getAssBtn.Size = new System.Drawing.Size(126, 23);
+            this.getAssBtn.TabIndex = 24;
+            this.getAssBtn.Text = "获取视频名称";
+            this.getAssBtn.UseVisualStyleBackColor = true;
+            this.getAssBtn.Click += new System.EventHandler(this.getAssBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 355);
+            this.ClientSize = new System.Drawing.Size(800, 410);
+            this.Controls.Add(this.getAssBtn);
+            this.Controls.Add(this.setAssBtn);
             this.Controls.Add(this.posRenameBtn);
             this.Controls.Add(this.positionLengthText);
             this.Controls.Add(this.compressText);
@@ -321,6 +345,8 @@
         private System.Windows.Forms.TextBox compressText;
         private System.Windows.Forms.TextBox positionLengthText;
         private System.Windows.Forms.Button posRenameBtn;
+        private System.Windows.Forms.Button setAssBtn;
+        private System.Windows.Forms.Button getAssBtn;
     }
 }
 

@@ -21,6 +21,9 @@ namespace 文件操作
 
         Lkw lkw = new Lkw();
 
+        // 视频名称数组
+        List<string> assArr = new List<string>();
+
         //创建图片压缩设置对象
         ImageCodecInfo jgpEncoder;
 
@@ -356,6 +359,82 @@ namespace 文件操作
                     fileNum += num;
                 }
             }
+
+            //设置字幕
+            if (type == "getass")
+            {
+                assArr.Clear();
+                foreach (string fileName in Directory.GetFileSystemEntries(dir))
+                {
+                    if (Directory.Exists(fileName))
+                    {
+                        continue;
+                    }
+
+                    //获取不带扩展名的文件名
+                    string usufName = Path.GetFileNameWithoutExtension(fileName);
+
+                    assArr.Add(usufName);
+
+                    //去重
+                    assArr.Distinct().ToList();
+                }
+
+
+            }
+
+            if (type == "setass")
+            {
+                int serial = 0;
+
+                if (assArr.Count() != file_number_count(dir))
+                {
+                    lkw.msbox("文件数量不一致！");
+                    return;
+                }
+
+                foreach (string fileName in Directory.GetFileSystemEntries(dir))
+                {
+                    if (Directory.Exists(fileName))
+                    {
+                        continue;
+                    }
+
+                    //获取文件扩展名
+                    string suffix = Path.GetExtension(fileName);
+
+                    string newName = dir + "\\" + assArr[serial++] + suffix;
+
+                    File.Move(fileName, newName);
+
+                }
+            }
+
+            if (type == "filecount")
+            {
+                
+            }
+        }
+
+        /// <summary>
+        /// 统计目录中文件数量
+        /// </summary>
+        /// <param name="path">路径</param>
+        /// <returns>文件数</returns>
+        public int file_number_count(string path)
+        {
+            int num = 0;
+            foreach (string fileName in Directory.GetFileSystemEntries(path))
+            {
+                if (Directory.Exists(fileName))
+                {
+                    continue;
+                }
+
+                num++;
+            }
+
+            return num;
         }
 
         /// <summary>
@@ -514,6 +593,18 @@ namespace 文件操作
             string path = folderText.Text;
             string length = positionLengthText.Text;
             folder_operation(path, "serial", length,"addpos");
+        }
+
+        private void getAssBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            folder_operation(path, "getass");
+        }
+
+        private void setAssBtn_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            folder_operation(path, "setass");
         }
     }
 }
