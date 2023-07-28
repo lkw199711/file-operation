@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using lkw;
@@ -256,14 +257,20 @@ namespace 文件操作
                 {
                     if (Directory.Exists(fileName))
                     {
-                        folder_operation(fileName, type);
+                        folder_operation(fileName, type, key0, "addpos");
                         continue;
                     }
                     //获取文件扩展名
                     string suffix = Path.GetExtension(fileName);
 
+                    //截取文件名中的数字部分
+                    string withoutSuffix = Path.GetFileNameWithoutExtension(fileName);
+                    string numberName = new Regex("\\d+").Match(withoutSuffix).Value;
+
+                    if (numberName == "") { numberName = withoutSuffix; };
+
                     //获取不带扩展名的文件名
-                    string usufName = key1 == "addpos" ? Path.GetFileNameWithoutExtension(fileName) : (++serial).ToString();
+                    string usufName = key1 == "addpos" ? numberName : (++serial).ToString();
 
                     string newName = dir + "\\" + usufName.PadLeft(length, '0') + suffix;
 
