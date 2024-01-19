@@ -55,6 +55,7 @@
             this.posRenameBtn = new System.Windows.Forms.Button();
             this.setAssBtn = new System.Windows.Forms.Button();
             this.getAssBtn = new System.Windows.Forms.Button();
+            this.btnArrange = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // folderText
@@ -208,6 +209,7 @@
             this.outFolderText.Name = "outFolderText";
             this.outFolderText.Size = new System.Drawing.Size(572, 21);
             this.outFolderText.TabIndex = 16;
+            this.outFolderText.TextChanged += new System.EventHandler(this.outFolderText_TextChanged);
             // 
             // outputFolderBtn
             // 
@@ -281,11 +283,22 @@
             this.getAssBtn.UseVisualStyleBackColor = true;
             this.getAssBtn.Click += new System.EventHandler(this.getAssBtn_Click);
             // 
+            // btnArrange
+            // 
+            this.btnArrange.Location = new System.Drawing.Point(428, 362);
+            this.btnArrange.Name = "btnArrange";
+            this.btnArrange.Size = new System.Drawing.Size(126, 23);
+            this.btnArrange.TabIndex = 25;
+            this.btnArrange.Text = "韩漫章节整理(绅士漫画)";
+            this.btnArrange.UseVisualStyleBackColor = true;
+            this.btnArrange.Click += new System.EventHandler(this.btnArrange_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 410);
+            this.Controls.Add(this.btnArrange);
             this.Controls.Add(this.getAssBtn);
             this.Controls.Add(this.setAssBtn);
             this.Controls.Add(this.posRenameBtn);
@@ -347,6 +360,7 @@
         private System.Windows.Forms.Button posRenameBtn;
         private System.Windows.Forms.Button setAssBtn;
         private System.Windows.Forms.Button getAssBtn;
+        private System.Windows.Forms.Button btnArrange;
     }
 }
 

@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -421,6 +422,32 @@ namespace 文件操作
             {
                 
             }
+
+            if (type == "arrange")
+            {
+                // 删除关键字
+                string key = key0;
+                string outFolder = outFolderText.Text;
+
+                foreach (string fileName in Directory.GetFileSystemEntries(dir))
+                {
+                    foreach (string fileName1 in Directory.GetFileSystemEntries(fileName))
+                    {
+                        string suffix = Path.GetExtension (fileName1);
+                        string baseName = Path.GetFileNameWithoutExtension(fileName1);
+                        string[] baseNameArr = baseName.Split('_');
+                        if(baseNameArr.Length != 2) continue;
+                        string route = outFolder + "\\" + baseNameArr[0];
+
+                        if(!Directory.Exists(route)) lkw.makedir(route);
+
+                        File.Move (fileName1, route +"\\"+ baseNameArr[1]+ suffix);
+                    }
+                }
+
+                return;
+            }
+                
         }
 
         /// <summary>
@@ -612,6 +639,17 @@ namespace 文件操作
         {
             string path = folderText.Text;
             folder_operation(path, "setass");
+        }
+
+        private void btnArrange_Click(object sender, EventArgs e)
+        {
+            string path = folderText.Text;
+            folder_operation(path, "arrange");
+        }
+
+        private void outFolderText_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
