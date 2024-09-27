@@ -431,6 +431,8 @@ namespace 文件操作
 
                 foreach (string fileName in Directory.GetFileSystemEntries(dir))
                 {
+                    // 非目录
+                    if (!Directory.Exists(fileName)) continue;
                     foreach (string fileName1 in Directory.GetFileSystemEntries(fileName))
                     {
                         string suffix = Path.GetExtension (fileName1);
