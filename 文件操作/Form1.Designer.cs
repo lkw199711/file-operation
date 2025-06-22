@@ -287,7 +287,7 @@
             // 
             this.btnArrange.Location = new System.Drawing.Point(428, 362);
             this.btnArrange.Name = "btnArrange";
-            this.btnArrange.Size = new System.Drawing.Size(126, 23);
+            this.btnArrange.Size = new System.Drawing.Size(158, 23);
             this.btnArrange.TabIndex = 25;
             this.btnArrange.Text = "韩漫章节整理(绅士漫画)";
             this.btnArrange.UseVisualStyleBackColor = true;
