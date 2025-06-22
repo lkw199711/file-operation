@@ -438,7 +438,7 @@ namespace 文件操作
                         string suffix = Path.GetExtension (fileName1);
                         string baseName = Path.GetFileNameWithoutExtension(fileName1);
                         string[] baseNameArr = baseName.Split('_');
-                        if(baseNameArr.Length != 2) continue;
+                        if(baseNameArr.Length < 2) continue;
                         string route = outFolder + "\\" + baseNameArr[0];
 
                         if(!Directory.Exists(route)) lkw.makedir(route);
